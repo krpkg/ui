@@ -6,22 +6,22 @@ Engineered with raw design tokens, dark tactical palettes, low-overhead styling,
 
 ## Installation
 
-Using the krpkg CLI:
+Using npm:
 
 ```bash
-krpkg install ui
+npm install @krpkg/ui
 ```
 
 Using Bun:
 
 ```bash
-bun add github:krpkg/ui
+bun add @krpkg/ui
 ```
 
-Using npm:
+Using pnpm:
 
 ```bash
-npm install github:krpkg/ui
+pnpm add @krpkg/ui
 ```
 
 ## Setup
@@ -103,10 +103,10 @@ import { colors, typography, spacing, themePalettes } from '@krpkg/ui/tokens';
 
 ### Supported Palettes
 
-- Amber Baseline (`default`): Deep obsidian tones with warm amber accents.
-- Citlali Star-Gaze (`citlali`): Deep midnight blue with soft pink highlights.
-- Furina Hydro-Overture (`furina`): Abyssal ocean navy with vivid hydro cyan.
-- Alley Neon-Noir (`alley`): Deep dark purple with electric neon magenta.
+- **Amber Baseline (`default`)**: Deep obsidian tones with warm amber accents.
+- **Citlali Star-Gaze (`citlali`)**: Deep midnight blue with soft pink highlights.
+- **Furina Hydro-Overture (`furina`)**: Abyssal ocean navy with vivid hydro cyan.
+- **Alley Neon-Noir (`alley`)**: Deep dark purple with electric neon magenta.
 
 Apply themes by setting the `data-theme` attribute on any DOM ancestor:
 
