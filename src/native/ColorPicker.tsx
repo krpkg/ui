@@ -7,7 +7,7 @@ export interface NativeColorPickerProps {
   onChange: (color: string) => void;
   presets?: string[];
   label?: string;
-  jp?: string;
+  sublabel?: string;
   coord?: string;
   style?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
@@ -22,18 +22,18 @@ export function ColorPicker({
     '#64748b', '#1e293b'
   ],
   label,
-  jp,
+  sublabel,
   coord,
   style,
   labelStyle,
 }: NativeColorPickerProps) {
   return (
     <View style={[styles.container, style]}>
-      {(label || jp || coord) && (
+      {(label || sublabel || coord) && (
         <View style={styles.header}>
           <View style={styles.labelGroup}>
             {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
-            {jp && <Text style={styles.jp}>{jp}</Text>}
+            {sublabel && <Text style={styles.sublabel}>{sublabel}</Text>}
             {coord && <Text style={styles.coord}>[{coord}]</Text>}
           </View>
           <Text style={styles.hexValue}>{value.toUpperCase()}</Text>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     color: colors.text1,
     textTransform: 'uppercase',
   },
-  jp: {
+  sublabel: {
     fontSize: 10,
     color: colors.text3,
   },
