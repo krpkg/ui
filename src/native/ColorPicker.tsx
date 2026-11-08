@@ -9,6 +9,7 @@ export interface NativeColorPickerProps {
   label?: string;
   sublabel?: string;
   coord?: string;
+  showHex?: boolean;
   style?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
 }
@@ -24,19 +25,22 @@ export function ColorPicker({
   label,
   sublabel,
   coord,
+  showHex = true,
   style,
   labelStyle,
 }: NativeColorPickerProps) {
+  const hasHeader = label || sublabel || coord;
+
   return (
     <View style={[styles.container, style]}>
-      {(label || sublabel || coord) && (
+      {hasHeader && (
         <View style={styles.header}>
           <View style={styles.labelGroup}>
             {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
             {sublabel && <Text style={styles.sublabel}>{sublabel}</Text>}
             {coord && <Text style={styles.coord}>[{coord}]</Text>}
           </View>
-          <Text style={styles.hexValue}>{value.toUpperCase()}</Text>
+          {showHex && <Text style={styles.hexValue}>{value.toUpperCase()}</Text>}
         </View>
       )}
 
