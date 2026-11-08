@@ -11,7 +11,9 @@ import {
 import { colors, spacing, borderRadius } from '../tokens';
 
 export interface NativeButtonProps extends Omit<PressableProps, 'style'> {
-  label: string;
+  label?: string;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
   variant?: 'primary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   style?: StyleProp<ViewStyle>;
@@ -20,6 +22,8 @@ export interface NativeButtonProps extends Omit<PressableProps, 'style'> {
 
 export function Button({
   label,
+  icon,
+  children,
   variant = 'outline',
   size = 'md',
   style,
@@ -40,17 +44,23 @@ export function Button({
       ]}
       {...props}
     >
-      <Text
-        style={[
-          styles.text,
-          styles[`text_${variant}`],
-          styles[`textSize_${size}`],
-          disabled && styles.textDisabled,
-          textStyle,
-        ]}
-      >
-        {label}
-      </Text>
+      {icon && <>{icon}</>}
+      {children ? (
+        children
+      ) : label ? (
+        <Text
+          style={[
+            styles.text,
+            styles[`text_${variant}`],
+            styles[`textSize_${size}`],
+            disabled && styles.textDisabled,
+            icon ? styles.textWithIcon : null,
+            textStyle,
+          ]}
+        >
+          {label}
+        </Text>
+      ) : null}
     </Pressable>
   );
 }
@@ -61,6 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    gap: spacing.xs,
   },
   size_sm: {
     paddingVertical: spacing.xs,
@@ -97,6 +108,9 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'monospace',
     fontWeight: '600',
+  },
+  textWithIcon: {
+    marginLeft: 2,
   },
   textSize_sm: {
     fontSize: 12,
