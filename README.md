@@ -1,6 +1,6 @@
 # @krpkg/ui
 
-Cyber-minimalist design system and React component library tailored for web applications, Tauri desktop apps, and mobile interfaces.
+Cyber-minimalist design system and component library tailored for **Web**, **Tauri Desktop**, and **React Native / Expo Mobile**.
 
 Engineered with raw design tokens, dark tactical palettes, low-overhead styling, and modular component architecture.
 
@@ -24,44 +24,16 @@ Using pnpm:
 pnpm add @krpkg/ui
 ```
 
-## Setup
+---
 
-Import the base CSS styles once in your application root (e.g. `main.tsx` or `App.tsx`):
+## Usage
 
-```typescript
-import '@krpkg/ui/styles.css';
-```
+### 1. Web & Tauri Desktop (DOM)
 
-## Component Overview
-
-| Component | Description |
-|---|---|
-| `Button` | Tactical buttons with solid, outline, ghost, and danger variants. |
-| `BracketCard` | Angular card container with technical corner accents. |
-| `CornerFrame` | Framed container with customizable HUD corner markers. |
-| `TerminalWindow` | Command console and shell output viewer container. |
-| `TelemetryBar` | High-density status strip for metrics, latency, and system health. |
-| `TacticalDrawer` | Slide-out overlay drawer for details and side panels. |
-| `HudModal` | Centered modal dialog with tactical border styling and backdrop blur. |
-| `HudToast` | Compact status notification banner. |
-| `CyberSwitch` | Toggle switch with binary cybernetic visual cues. |
-| `SegmentedControl` | Multi-option tab switcher with active slider indicator. |
-| `Input` | Text input field with prefix, suffix, and error states. |
-| `KeyValGrid` | Technical key-value inspection table for telemetry and metadata. |
-| `Badge` | Status and category badges (accent, teal, red, green, muted). |
-| `Dot` | Pulsing or static status indicator dot. |
-| `TechLabel` | Monospace technical label with micro-formatting. |
-| `StickyNote` | Analog-aesthetic memo element in vintage paper tones. |
-| `SpoilerGate` | Blur/reveal privacy guard for sensitive or NSFW content. |
-| `Vinyl` | Turntable vinyl record animation component. |
-| `Breadcrumbs` | Tactical breadcrumb navigation trail. |
-| `BottomBar` | Mobile and compact viewport navigation bar. |
-| `Tooltip` | Contextual micro-tooltip on hover/focus. |
-| `Logo` | Official SVG monogram and logo variants. |
-
-## Quick Example
+Import components and the base stylesheet:
 
 ```tsx
+import '@krpkg/ui/styles.css';
 import React, { useState } from 'react';
 import {
   Button,
@@ -76,22 +48,55 @@ export function Dashboard() {
 
   return (
     <BracketCard title="SYSTEM_TELEMETRY">
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        <Badge variant="accent">ONLINE</Badge>
-        <CyberSwitch checked={active} onChange={setActive} label="DEBUG_MODE" />
-        <Button variant="solid" onClick={() => console.log('Ping')}>
-          EXECUTE
-        </Button>
-      </div>
-
-      <TerminalWindow title="STDOUT" style={{ marginTop: '1rem' }}>
+      <Badge variant="accent">ONLINE</Badge>
+      <CyberSwitch checked={active} onChange={setActive} label="DEBUG_MODE" />
+      <Button variant="outline" onClick={() => console.log('Ping')}>
+        EXECUTE
+      </Button>
+      <TerminalWindow title="STDOUT">
         <p>Telemetry stream initialized.</p>
-        <p>Awaiting instructions...</p>
       </TerminalWindow>
     </BracketCard>
   );
 }
 ```
+
+### 2. React Native & Expo Mobile (`@krpkg/ui/native`)
+
+Native components use native primitives (`View`, `Text`, `Pressable`, `StyleSheet`) and zero DOM overhead:
+
+```tsx
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import {
+  Button,
+  BracketCard,
+  Badge,
+  Dot,
+  TechLabel,
+  CyberSwitch,
+} from '@krpkg/ui/native';
+
+export function MobileScreen() {
+  const [active, setActive] = useState(false);
+
+  return (
+    <BracketCard active={active}>
+      <Badge label="ONLINE" variant="accent" />
+      <Dot color="accent" />
+      <TechLabel label="SYS_CORE" coord="04.81" />
+      <CyberSwitch checked={active} onChange={setActive} label="OVERCLOCK" />
+      <Button
+        label="ENGAGE"
+        variant="primary"
+        onPress={() => console.log('Engaged')}
+      />
+    </BracketCard>
+  );
+}
+```
+
+---
 
 ## Design Tokens and Themes
 
@@ -108,7 +113,7 @@ import { colors, typography, spacing, themePalettes } from '@krpkg/ui/tokens';
 - **Furina Hydro-Overture (`furina`)**: Abyssal ocean navy with vivid hydro cyan.
 - **Alley Neon-Noir (`alley`)**: Deep dark purple with electric neon magenta.
 
-Apply themes by setting the `data-theme` attribute on any DOM ancestor:
+Apply themes on Web by setting the `data-theme` attribute on any DOM ancestor:
 
 ```html
 <html data-theme="citlali">
@@ -116,13 +121,18 @@ Apply themes by setting the `data-theme` attribute on any DOM ancestor:
 </html>
 ```
 
+---
+
 ## Subpath Exports
 
-- `@krpkg/ui`: Core React components and base styles.
-- `@krpkg/ui/tokens`: Design tokens, colors, themes, typography, and spacing constants.
-- `@krpkg/ui/utils`: Formatting helpers, number formatters, and style utilities.
-- `@krpkg/ui/styles.css`: Compiled CSS theme variables and baseline resets.
-- `@krpkg/ui/assets/*`: Static SVG icons and graphic assets.
+| Export Path | Description | Target Environment |
+|---|---|---|
+| `@krpkg/ui` | Core HTML/DOM React components | Web & Tauri Desktop |
+| `@krpkg/ui/native` | React Native & Expo primitives (`Pressable`, `View`, `Text`) | iOS & Android (Expo / RN) |
+| `@krpkg/ui/tokens` | Pure JS/TS color tokens, themes, typography, & spacing | Universal (Web + Mobile) |
+| `@krpkg/ui/utils` | Timestamp, duration, and number formatters | Universal (Web + Mobile) |
+| `@krpkg/ui/styles.css` | Compiled CSS theme variables & baseline resets | Web & Tauri Desktop |
+| `@krpkg/ui/assets/*` | Static SVG icons and graphic assets | Universal |
 
 ## License
 
